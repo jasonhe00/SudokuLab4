@@ -1,9 +1,13 @@
 package pkgGame;
 
 import java.security.SecureRandom;
+
 import java.util.Random;
 
 import pkgHelper.LatinSquare;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Sudoku - This class extends LatinSquare, adding methods, constructor to
@@ -408,6 +412,48 @@ public class Sudoku extends LatinSquare {
 			int a = ar[index];
 			ar[index] = ar[i];
 			ar[i] = a;
+		}
+	}
+	
+	
+	private class Cell {
+		private int iRow;
+		private int iCol;
+		private ArrayList<Integer> lstValidValues  = new ArrayList<Integer>();
+		
+		public Cell(int row, int col) {
+			iRow = row;
+			iCol = col;
+		}
+		
+		public int getiRow() {
+			return iRow;
+		}
+		
+		public int getiCol() {
+			return iCol;
+		}
+		
+		public int hashCode() {
+			return Objects.hash(iRow, iCol);
+		}
+		
+		public ArrayList<Integer> getlstValidValues() {
+			return lstValidValues;
+		}
+		
+		public Cell GetNextCell(Cell current) {
+			int newRow = current.getiRow();
+			int newCol = current.getiCol();
+			if (current.getiCol() < iSize - 1) {
+				newCol++;
+			} else if (current.getiCol() == (iSize - 1) && current.getiRow() == (iSize - 1)) {
+				return null;
+			} else {
+				newRow++;
+				newCol = 0;
+			}
+			return new Cell(newRow, newCol);
 		}
 	}
 }
