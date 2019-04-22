@@ -122,4 +122,16 @@ public class SudokuTest {
 		}
 
 	}
+	
+	@Test
+	public void randomSudoku_test1() {
+		try {
+			Sudoku s1 = new Sudoku(9);
+			s1.PrintPuzzle();
+			assertTrue(s1.isSudoku());
+			
+		} catch (Exception e) {
+			fail("Test failed to build a Sudoku");
+		}
+	}
 }
